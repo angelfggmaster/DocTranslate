@@ -1,0 +1,36 @@
+﻿<div class="container body-content" ng-controller="wordDocumentController as vm">
+    
+    <form ng-submit="vm.submit()">
+        <div class="form-group">
+            <label class="control-label" for="Filename">File Name</label>
+            <div class="input-group">
+                <span class="input-group-btn">
+                    <span class="btn btn-info btn-file">
+                        Browse
+                        <input type="file" id="ImportedFile" name="ImportedFile" file-model="vm.myFile" accept=".docx" />
+                    </span>
+                </span>
+
+                <input type="text" id="Filename" class="form-control" style="min-width:180px" value="" ng-disabled="true" />
+                <input type="submit" value="Send File" class="btn btn-success" />
+                <input type="text" class="hidden" ng-model="vm.data.FileNames" />
+
+                <input type="button" value="Get Document" class="btn btn-primary" ng-click="vm.TranslateDocument()"/>
+            </div>
+        </div>
+    </form>
+    <div class="separator"></div>
+
+    <table>
+        <tr ng-repeat="paragraph in vm.paragraphs track by $index">
+            <td>{{paragraph}}</td>
+        </tr>
+    </table>
+</div>
+
+<script>
+    $('#ImportedFile').on('change', function () {
+        var fileName = $(this).val().split('\\').pop();
+        $('#Filename').val(fileName);
+    })
+</script>

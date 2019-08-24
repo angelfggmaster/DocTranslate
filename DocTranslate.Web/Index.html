@@ -1,0 +1,92 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+    <meta name="description" content="" />
+
+    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <link rel="apple-touch-icon" href="touch-icon.png" />
+
+    <link rel="icon" href="touch-icon.png" />
+    <meta name="msapplication-TileImage" content="touch-icon.png" />
+
+    <title>Document Traductor</title>
+
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="Content/font-awesome.min.css" rel="stylesheet" />
+    <link href="Content/Site.css" rel="stylesheet" />
+
+    <link href="Content/doctranslate.css" rel="stylesheet" />
+</head>
+<body ng-app="app">
+    <div id="TitleBar">
+        <a href="#/worddocument">
+            <img src="images/translate-icon.png" style="height: 35px; float: left" />
+            <div style="float: left; margin-left: 5px; line-height: 1.2">
+                <i style="color: steelblue; font-size: 0.8em; font-weight: bold;">Document</i><br />
+                <i style="color: whitesmoke; font-size: 1.25em; font-weight: bold;">Translate</i>
+            </div>
+        </a>
+    </div>
+
+    <div ng-controller="headerController as vm" ng-cloak style="margin: 0; padding: 0; border: none;">
+        <div class="banner">
+
+        </div>
+
+        <div id="MainView" autoscroll="true" ng-cloak
+             style="width: 100%; padding-top: 10px;" class="slide-animation"
+             ng-view>
+        </div>
+    </div>
+
+    <script src="scripts/jquery.min.js"></script>
+    <script src="scripts/ww.jquery.min.js"></script>
+    <script src="scripts/ww.angular.js"></script>
+    <script src="scripts/lodash.min.js"></script>
+
+    <script src="scripts/fastclick.min.js"></script>
+
+
+    <script>
+        // hook up fast click for mobile devices - avoid 300ms delay
+        window.addEventListener('load', function () {
+            // only use FastClick for iOS
+            //if (navigator.userAgent.indexOf('iPhone') ||
+            //    navigator.userAgent.indexOf('iPad'))
+            FastClick.attach(document.body);
+        }, false);
+
+        // global script settings
+        globals = {
+            baseUrl: "./"
+        };
+    </script>
+
+    <!--<script src="js/angular-concat.min.js"></script>-->
+
+    <script src="scripts/angular/angular.min.js"></script>
+    <script src="scripts/angular/angular-route.min.js"></script>
+    <script src="scripts/angular/angular-animate.min.js"></script>
+    <script src="scripts/angular/angular-sanitize.min.js"></script>
+    <script src="scripts/angular/angular-touch.min.js"></script>
+    <script src="Scripts/angular/angular-resource.min.js"></script>
+
+    <!--<script src="../scripts/ww.angular.min.js"></script>-->
+    <script src="Content/bootstrap.min.js"></script>
+    <script src="scripts/bootstrap-typeahead.min.js"></script>
+
+    <!-- combined app scripts - build with gulp -->
+    <!--<script src="js/app.min.js"></script>-->
+
+    <script src="app/js/app.js"></script>
+    <script src="app/js/headerController.js"></script>
+    <script src="app/js/wordDocumentController.js"></script>
+    <script src="app/js/file-model.js"></script>
+</body>
+</html>
