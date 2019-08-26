@@ -12,5 +12,7 @@ namespace DocTranslate.WebAPI.Models
         public string DownloadLink { get; set; }
         public IEnumerable<string> ContentTypes { get; set; }
         public IEnumerable<string> Names { get; set; }
+        public IEnumerable<string> FileExtensions { get; set; }
+        public string FullFileName { get; set; }
     }
 }

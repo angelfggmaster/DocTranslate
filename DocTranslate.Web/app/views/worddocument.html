@@ -7,13 +7,13 @@
                 <span class="input-group-btn">
                     <span class="btn btn-info btn-file">
                         Browse
-                        <input type="file" id="ImportedFile" name="ImportedFile" file-model="vm.myFile" accept=".docx" />
+                        <input type="file" id="ImportedFile" name="ImportedFile" file-model="vm.myFile" accept=".docx,.pdf" />
                     </span>
                 </span>
 
                 <input type="text" id="Filename" class="form-control" style="min-width:180px" value="" ng-disabled="true" />
                 <input type="submit" value="Send File" class="btn btn-success" />
-                <input type="text" class="hidden" ng-model="vm.data.FileNames" />
+                <input type="text" class="hidden" ng-model="vm.data.FullFileName" />
 
                 <input type="button" value="Get Document" class="btn btn-primary" ng-click="vm.TranslateDocument()"/>
             </div>
@@ -21,11 +21,14 @@
     </form>
     <div class="separator"></div>
 
-    <table>
+    <table border="1">
         <tr ng-repeat="paragraph in vm.paragraphs track by $index">
+            <td>{{paragraph}}</td>
             <td>{{paragraph}}</td>
         </tr>
     </table>
+
+    <!--<textarea wrap="soft" ng-model="vm.docText" />-->
 </div>
 
 <script>

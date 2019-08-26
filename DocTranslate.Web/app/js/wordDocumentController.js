@@ -20,9 +20,10 @@
 
         vm.paragraphs = [];
         vm.TranslateDocument = function () {
-            fileUpload.getContentDocument(vm.data.FileNames, urlService)
+            fileUpload.getContentDocument(vm.data.FullFileName, urlService)
                 .then(function (resp) {
                     vm.paragraphs = resp;
+                    //vm.docText = resp;
                 });
         };
     }
