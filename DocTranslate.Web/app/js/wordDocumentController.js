@@ -23,8 +23,11 @@
             fileUpload.getContentDocument(vm.data.FullFileName, urlService)
                 .then(function (resp) {
                     vm.paragraphs = resp;
-                    //vm.docText = resp;
                 });
+        };
+
+        vm.translate = function (index) {
+            alert(index);
         };
     }
 }

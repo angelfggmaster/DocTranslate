@@ -107,6 +107,8 @@
     <Compile Include="Helpers\PdfDocumentManager.cs" />
     <Compile Include="Helpers\WordDocumentManager.cs" />
     <Compile Include="Models\FileResult.cs" />
+    <Compile Include="Models\Paragraph.cs" />
+    <Compile Include="Models\TranslateParagraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

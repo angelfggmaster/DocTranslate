@@ -85,6 +85,7 @@
     <Content Include="Content\doctranslate.css" />
     <Content Include="Content\doctranslate.min.css" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\textarea.css" />
     <Content Include="favicon.ico" />
     <Content Include="images\artists.png" />
     <Content Include="images\artists32.png" />
@@ -122,6 +123,7 @@
     <Content Include="Scripts\bootstrap-typeahead.min.js" />
     <Content Include="Scripts\fastclick.js" />
     <Content Include="Scripts\fastclick.min.js" />
+    <Content Include="Scripts\FileSaver.js" />
     <Content Include="Scripts\jquery.js" />
     <Content Include="Scripts\jquery.min.js" />
     <Content Include="Scripts\lodash.js" />

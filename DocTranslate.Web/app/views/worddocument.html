@@ -1,5 +1,5 @@
 ﻿<div class="container body-content" ng-controller="wordDocumentController as vm">
-    
+
     <form ng-submit="vm.submit()">
         <div class="form-group">
             <label class="control-label" for="Filename">File Name</label>
@@ -15,20 +15,45 @@
                 <input type="submit" value="Send File" class="btn btn-success" />
                 <input type="text" class="hidden" ng-model="vm.data.FullFileName" />
 
-                <input type="button" value="Get Document" class="btn btn-primary" ng-click="vm.TranslateDocument()"/>
+                <input type="button" value="Get Document" class="btn btn-primary" ng-click="vm.TranslateDocument()" />
             </div>
         </div>
     </form>
     <div class="separator"></div>
 
-    <table border="1">
-        <tr ng-repeat="paragraph in vm.paragraphs track by $index">
-            <td>{{paragraph}}</td>
-            <td>{{paragraph}}</td>
-        </tr>
-    </table>
-
-    <!--<textarea wrap="soft" ng-model="vm.docText" />-->
+    <div class="col-xs-12">
+        <div class="row">
+            <div class="col-xs-1">
+                <h4>Item</h4>
+            </div>
+            <div class="col-xs-5">
+                <h4>Original</h4>
+            </div>
+            <div class="col-xs-5">
+                <h4>Translate</h4>
+            </div>
+            <div class="col-xs-1">
+                <h4>Action</h4>
+            </div>
+        </div>
+        <div ng-repeat="p in vm.paragraphs track by $index">
+            <div class="row">
+                <div class="col-xs-1">
+                    {{p.ParagraphId}}
+                    <input type="text" class="hidden" ng-model="vm.paragraphs[$index].ParagraphId" />
+                </div>
+                <div class="col-xs-5" style="border: solid; border-width: 1px; padding: 0">
+                    <textarea ng-model="p.OriginLanguage" />
+                </div>
+                <div class="col-xs-5" style="border: solid; border-width: 1px">
+                    {{p.TargetLanguage}}
+                </div>
+                <div class="col-xs-1">
+                    <input type="button" ng-click="vm.translate(vm.paragraphs[$index].ParagraphId)" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <script>

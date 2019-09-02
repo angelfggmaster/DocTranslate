@@ -1,11 +1,13 @@
 ﻿using DocTranslate.WebAPI.Attributes;
 using DocTranslate.WebAPI.Helpers;
 using DocTranslate.WebAPI.Models;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web.Hosting;
 using System.Web.Http;
@@ -15,6 +17,7 @@ namespace DocTranslate.WebAPI.Controllers
     public class WordDocumentsController : ApiController
     {
         private static readonly string ServerUploadFolder = HostingEnvironment.MapPath("~/Uploads");
+        private static readonly string ServerSaveFolder = HostingEnvironment.MapPath("~/Saves");
 
         [ValidateMimeMultipartContentFilter]
         public async Task<IHttpActionResult> PostUploadSingleFile()
@@ -45,7 +48,7 @@ namespace DocTranslate.WebAPI.Controllers
             return Ok(result);
         }
 
-        public IEnumerable<string> GetContentDocument(string docPath)
+        public IHttpActionResult GetContentDocument(string docPath)
         {
             string fileName = Path.Combine(ServerUploadFolder, docPath.Substring(docPath.LastIndexOf("\\") + 1));
 
@@ -62,15 +65,31 @@ namespace DocTranslate.WebAPI.Controllers
                     read = new PdfDocumentManager();
                     break;
                 default:
-                    return new List<string> { "Invalid document" };
+                    return NotFound();
             }
 
-            string temp = read.GetText(fileName);
+            string temp = Regex.Replace(read.GetText(fileName), @"\.\s?\n", "¿¿");
+            temp = Regex.Replace(temp, "\n", " ");
 
-            List<string> texts = temp                
-                .Split(new string[] { "\r\n" }, StringSplitOptions.RemoveEmptyEntries).ToList();
+            List<string> paragraphtemp = temp
+                .Split(new string[] { "¿¿" }, StringSplitOptions.RemoveEmptyEntries).ToList();
 
-            return texts;
+            List<Paragraph> paragraphs = new List<Paragraph>();
+            for (int id = 0; id < paragraphtemp.Count; id++)
+            {
+                Paragraph p = new Paragraph();
+                p.ParagraphId = id;
+                p.OriginLanguage = paragraphtemp[id];
+                p.TargetLanguage = string.Empty;
+                paragraphs.Add(p);
+            }
+
+            string json = JsonConvert.SerializeObject(paragraphs);
+            StreamWriter sw = new StreamWriter(Path.Combine(ServerSaveFolder, docPath.Substring(docPath.LastIndexOf("\\") + 1)).Replace(fileExtension,".json"), true);
+            sw.Write(json);
+            sw.Close();
+
+            return Ok(paragraphs);
             //return read.GetText(fileName);
         }
     }
