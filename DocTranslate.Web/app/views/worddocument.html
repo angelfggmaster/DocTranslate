@@ -43,10 +43,10 @@
                     <input type="text" class="hidden" ng-model="vm.paragraphs[$index].ParagraphId" />
                 </div>
                 <div class="col-xs-5" style="border: solid; border-width: 1px; padding: 0">
-                    <textarea ng-model="p.OriginLanguage" />
+                    <textarea ng-model="vm.paragraphs[$index].OriginLanguage" />
                 </div>
                 <div class="col-xs-5" style="border: solid; border-width: 1px">
-                    {{p.TargetLanguage}}
+                    {{vm.paragraphs[$index].TargetLanguage}}
                 </div>
                 <div class="col-xs-1">
                     <input type="button" ng-click="vm.translate(vm.paragraphs[$index].ParagraphId)" />

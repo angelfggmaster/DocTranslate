@@ -39,9 +39,10 @@ namespace DocTranslate.WebAPI.Controllers
                         entry.Headers.ContentDisposition.FileName.LastIndexOf(".")).Trim('"'))
             };
 
+            string originalName = result.Names.First().Trim(new char[] { '\\', '"' });
             string fileName = result.FileNames.First();
-            string ext = result.FileExtensions.First();
-            result.FullFileName = fileName + ext;
+            //string ext = result.FileExtensions.First();
+            result.FullFileName = Path.Combine(ServerUploadFolder, originalName);
 
             File.Move(fileName, result.FullFileName);
 
@@ -85,7 +86,7 @@ namespace DocTranslate.WebAPI.Controllers
             }
 
             string json = JsonConvert.SerializeObject(paragraphs);
-            StreamWriter sw = new StreamWriter(Path.Combine(ServerSaveFolder, docPath.Substring(docPath.LastIndexOf("\\") + 1)).Replace(fileExtension,".json"), true);
+            StreamWriter sw = new StreamWriter(Path.Combine(ServerSaveFolder, docPath.Substring(docPath.LastIndexOf("\\") + 1)).Replace(fileExtension, ".json"), true);
             sw.Write(json);
             sw.Close();
 
